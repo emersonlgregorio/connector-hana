@@ -1,71 +1,16 @@
-# Postgres Connector
+# SAP Hana Connector
 
 ## Commands
 
-All commands require passing in the postgress connection string:
+All commands require passing in the SAP Hana connection string:
 
 ```
 database_connection_str: str
 ```
 
-Which is passed directly to `pyscopg2`. eg: `dbname=dev user=dev password=dev host=postgres-db port=5432`
+Which is passed directly to `hdbcli.dbapi`. eg: `user=SYSTEM password=password address=localhost port=30015`
 
 All commands except for `DoSQL` require `table_name: str` as well.
-
-### CreateTable
-
-Additional parameters:
-
-```
-schema: Dict[str, Any]
-```
-
-Creates a table with the provided column names and their [types](https://www.postgresql.org/docs/current/datatype.html).
-
-The schema parameter expects a key called `column_definitions`. The value associated with this key is a list of dictionaries, each containing the `name` and `type` of a column.
-
-As an example, to create a table like:
-
-```
-dev=# \d states;
-                       Table "public.states"
- Column  |          Type          | Collation | Nullable | Default 
----------+------------------------+-----------+----------+---------
- country | character varying(255) |           |          | 
- state   | character varying(13)  |           |          | 
- abbrev  | character(2)           |           |          | 
- somenum | integer                |           |          | 
-
-```
-
-The schema passed to the connector would be:
-
-```
-{
-  "column_definitions": [
-    {
-        "name": "country",
-        "type": "varchar(255)",
-    },
-    {
-        "name": "state",
-        "type": "varchar(13)",
-    },
-    {
-        "name": "abbrev",
-        "type": "char(2)",
-    },
-    {
-        "name": "somenum",
-        "type": "int",
-    }
-  ]
-}
-```
-
-### DropTable
-
-Drops a table.
 
 ### InsertValues
 
@@ -182,17 +127,6 @@ The schema passed to the connector would be:
   ]
 }
 ```
-
-### DeleteValues
-
-Additional parameters:
-
-```
-schema: Dict[str, Any]
-```
-
-Deletes rows from a table with the provided optional where clause. The where clause is specified, and works, the same as described in `SelectValues`.
-
 
 ### UpdateValues
 
