@@ -31,22 +31,3 @@ class DoSQL(BaseCommand, ConnectorCommand):
 
         return self.execute_query(sql, self.database_connection_str, values)
 
-
-
-if __name__ == '__main__':
-   connHana = {"address": "172.20.1.4",
-               "port": "30015",
-               "user": "SYSTEM",
-               "password": "9Ab63^Op33"
-               }
-   table =  "SBO_CRESTANI_QA.\"Entidade\""
-   schema = {
-       "columns": [
-           "\"ID\"",
-           "\"NomeFantasia\"",
-           "\"CNPJ\""
-       ]
-   }
-   teste = DoSQL(connHana,table,schema)
-   result = teste.execute()
-   print(result)
