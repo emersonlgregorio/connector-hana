@@ -6,7 +6,7 @@ from psycopg2.extras import Json  # type: ignore
 from spiffworkflow_connector_command.command_interface import ConnectorCommand
 from spiffworkflow_connector_command.command_interface import ConnectorProxyResponseDict
 
-from src.connector_hana.base_command import BaseCommand
+from connector_hana.base_command import BaseCommand
 
 register_adapter(dict, Json)
 
